@@ -99,7 +99,6 @@ void FB::BrowserHost::shutdown()
 
 void FB::BrowserHost::htmlLog(const std::string& str)
 {
-    FBLOG_INFO("BrowserHost", "Logging to HTML: " << str);
     if (m_htmlLogEnabled) {
         try {
             this->ScheduleAsyncCall(&FB::BrowserHost::AsyncHtmlLog,
