@@ -113,7 +113,7 @@ void FB::BrowserHost::AsyncHtmlLog(void *logReq)
 {
     FB::AsyncLogRequest *req = (FB::AsyncLogRequest*)logReq;
     try {
-        FB::DOM::WindowPtr window = req->m_host->getDOMWindow();
+        FB::DOM::WindowPtr window = req->m_host.lock()->getDOMWindow();
 
         if (window && window->getJSObject()->HasProperty("console")) {
             FB::JSObjectPtr obj = window->getProperty<FB::JSObjectPtr>("console");
@@ -122,10 +122,6 @@ void FB::BrowserHost::AsyncHtmlLog(void *logReq)
                 obj->Invoke("log", FB::variant_list_of(req->m_msg));
         }
     } catch (const std::exception &) {
-        // printf("Exception: %s\n", e.what());
-        // Fail silently; logging should not require success.
-        FBLOG_TRACE("BrowserHost", "Logging to browser console failed");
-        return;
     }
     delete req;
 }

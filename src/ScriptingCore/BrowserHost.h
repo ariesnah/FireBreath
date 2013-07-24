@@ -47,7 +47,7 @@ namespace FB
     {
         AsyncLogRequest(const BrowserHostPtr& host, const std::string& message) : m_host(host), m_msg(message) { }
 
-        const boost::shared_ptr<BrowserHost> m_host;
+        const BrowserHostWeakPtr m_host;
         std::string m_msg;
     };
 
