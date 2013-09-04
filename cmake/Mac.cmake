@@ -18,6 +18,9 @@ cmake_minimum_required(VERSION 2.8.5)
 
 set (PATCH_DESC_FILENAME ${CMAKE_BINARY_DIR}/xcode_patch_desc.txt)
 
+set(LINK_FLAGS -stdlib=libc++)
+set(CMAKE_CXX_FLAGS -stdlib=libc++)
+
 if ("${CMAKE_GENERATOR}" STREQUAL "Xcode" AND NOT XCODE_DIR)
     execute_process (COMMAND
          xcode-select -print-path
